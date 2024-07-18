@@ -15,7 +15,7 @@ Deepen understanding of DSA concepts
 Prepare for technical interviews
 
 <h4>📚 Additional Learning</h4>
-In addition to this challenge, I'm continuing my studies in Spring Boot to enhance my backend development skills. This dual approach will help me become a well-rounded developer.
+In addition to this challenge, I'm continuing my studies in Cloud & backend databases to enhance my backend development skills. This dual approach will help me become a well-rounded developer.
 
 <h4>🙌 Follow Along</h4>
 Feel free to provide any advice or words of encouragement. Your support means a lot!
