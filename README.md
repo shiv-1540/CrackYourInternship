@@ -7,7 +7,7 @@ My goal is to solve 6 questions each day, pushing myself to learn and grow.
 <h4>📅 Challenge Overview</h4>
 Duration: 45 Days
 Total Questions: 270
-Daily Goal: 6 Questions
+Daily Goal: 3-4 Questions
 
 <h4>🎯 Goals</h4>
 Strengthen problem-solving skills
