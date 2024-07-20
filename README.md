@@ -1,7 +1,7 @@
 # CrackYourInternship
  Welcome to My 45-Day #CrackYourInternship Journey! <br>
 This repository documents my progress as I tackle 270 Data Structures and Algorithms (DSA) questions from Arsh Goyal's sheet. <br>
-My goal is to solve 6 questions each day, pushing myself to learn and grow.
+My goal is to solve 3-4 questions each day, pushing myself to learn and grow.
 
 <hr>
 <h4>📅 Challenge Overview</h4>
