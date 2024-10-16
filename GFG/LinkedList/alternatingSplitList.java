@@ -27,3 +27,31 @@
 
         return arr;
     }
+
+
+
+
+
+  // Function to append a new node with newData at the end of a linked list
+    Node[] alternatingSplitList(Node head) {
+        // code here
+        if(head.next==null) return new Node[]{head,null};
+        
+        Node head1=head, head2= head.next, h1=head1, h2=head2;
+        head= head2.next; int c=2;
+        
+        while(head!=null ) {
+            if(c%2 ==0){
+                head1.next= head; 
+                head1= head1.next; c++;
+            } else {
+                head2.next= head; 
+                head2= head2.next; c++;
+            }
+            head= head.next;
+        }
+        
+        head1.next= null; head2.next= null;
+        
+        return new Node[]{ h1, h2 };
+    }
