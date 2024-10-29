@@ -1,0 +1,126 @@
+Logic1 =>
+Recursive Way 
+
+public int maxMoves(int[][] grid) {
+        int maxRow = grid.length - 1;
+        int maxCol = grid[0].length - 1;
+        int res = 0;
+
+        for (int i = 0; i <= maxRow; i++) {
+            int tempRes = recursion(grid, i, 0, maxRow, maxCol);
+            res = Math.max(res, tempRes);
+        }
+
+        return res;
+    }
+
+    int recursion(int[][] grid, int row, int col, int maxRow, int maxCol) {
+        if (row < 0 || col > maxCol || row > maxRow) return 0;
+
+        int diagonalUp = 0, right = 0, diagonalDown = 0;
+
+        if (row - 1 >= 0 && col + 1 <= maxCol && grid[row - 1][col + 1] > grid[row][col]) {
+            diagonalUp = 1 + recursion(grid, row - 1, col + 1, maxRow, maxCol);
+        }
+
+        if (col + 1 <= maxCol && grid[row][col + 1] > grid[row][col]) {
+            right = 1 + recursion(grid, row, col + 1, maxRow, maxCol);
+        }
+
+        if (row + 1 <= maxRow && col + 1 <= maxCol && grid[row + 1][col + 1] > grid[row][col]) {
+            diagonalDown = 1 + recursion(grid, row + 1, col + 1, maxRow, maxCol);
+        }
+
+        return Math.max(diagonalUp, Math.max(right, diagonalDown));
+    }
+
+ Time Complexity:: O(3^n)  
+
+Logic2=>
+
+
+class Solution {
+    public int maxMoves(int[][] grid) {
+        int maxRow = grid.length - 1;
+        int maxCol = grid[0].length - 1;
+        int[][] table = new int[maxRow + 1][maxCol + 1];
+        int res = 0;
+
+        for (int col = maxCol; col >= 0; col--) {
+            for (int row = 0; row <= maxRow; row++) {
+                int diagonalUp = 0, right = 0, diagonalDown = 0;
+
+                if (row - 1 >= 0 && col + 1 <= maxCol && grid[row - 1][col + 1] > grid[row][col]) {
+                    diagonalUp = 1 + table[row - 1][col + 1];
+                }
+
+                if (col + 1 <= maxCol && grid[row][col + 1] > grid[row][col]) {
+                    right = 1 + table[row][col + 1];
+                }
+
+                if (row + 1 <= maxRow && col + 1 <= maxCol && grid[row + 1][col + 1] > grid[row][col]) {
+                    diagonalDown = 1 + table[row + 1][col + 1];
+                }
+
+                table[row][col] = Math.max(diagonalUp, Math.max(right, diagonalDown));
+                if (col == 0) res = Math.max(res, table[row][0]);
+            }
+        }
+
+        return res;
+    }
+}
+
+Logic3
+
+public int maxMoves(int[][] grid) {
+    int mrow = grid.length;
+    int mcol = grid[0].length;
+    int res = 0;
+
+    // Memoization table
+    int[][] memo = new int[mrow][mcol];
+    for (int i = 0; i < mrow; i++) {
+        Arrays.fill(memo[i], -1); // Initialize memoization table with -1
+    }
+
+    // Start each possible path from the first column of each row
+    for (int i = 0; i < mrow; i++) {
+        int temp = help(grid, i, 0, mrow, mcol, memo);
+        res = Math.max(res, temp);
+    }
+    return res;
+}
+
+int help(int[][] grid, int row, int col, int mrow, int mcol, int[][] memo) {
+    // If out of bounds
+    if (row < 0 || row >= mrow || col >= mcol) {
+        return 0;
+    }
+    
+    // Check memo table to avoid recomputation
+    if (memo[row][col] != -1) {
+        return memo[row][col];
+    }
+
+    int right = 0, digup = 0, digdown = 0;
+    
+    // Check right diagonal up
+    if (row - 1 >= 0 && col + 1 < mcol && grid[row - 1][col + 1] > grid[row][col]) {
+        digup = 1 + help(grid, row - 1, col + 1, mrow, mcol, memo);
+    }
+    
+    // Check right
+    if (col + 1 < mcol && grid[row][col + 1] > grid[row][col]) {
+        right = 1 + help(grid, row, col + 1, mrow, mcol, memo);
+    }
+    
+    // Check right diagonal down
+    if (row + 1 < mrow && col + 1 < mcol && grid[row + 1][col + 1] > grid[row][col]) {
+        digdown = 1 + help(grid, row + 1, col + 1, mrow, mcol, memo);
+    }
+    
+    // Store result in memo table and return the maximum of the possible moves
+    memo[row][col] = Math.max(digup, Math.max(digdown, right));
+    return memo[row][col];
+}
