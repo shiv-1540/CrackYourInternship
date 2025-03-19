@@ -23,3 +23,22 @@ public List<List<Integer>> findTriplets(int[] arr) {
         }
         return list;
     }
+
+======================================================================
+          public List<List<Integer>> findTriplets(int[] arr) {
+        Map <Integer,List<Integer>> hash=new HashMap <>();
+        List<List<Integer>> res=new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+                int val=-1*(arr[i]+arr[j]);
+                if(hash.containsKey(val)){
+                    for(int k:hash.get(val)){
+                        res.add(Arrays.asList(k,i,j));
+                    }
+                }
+            }
+            hash.putIfAbsent(arr[i],new ArrayList<>());
+            hash.get(arr[i]).add(i);
+        }    
+        return res;
+    }
